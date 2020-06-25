@@ -1,0 +1,12 @@
+commands:
+    free-space:
+        command: df -x squashfs
+
+hosts:
+    - host1:
+        ip: 192.168.30.3
+        user: ubuntu
+
+    - host2:
+        ip: raspberrypi.local
+        user: pi

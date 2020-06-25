@@ -1,1 +1,4 @@
 /target
+
+# Ignoring local config file
+/config.yaml

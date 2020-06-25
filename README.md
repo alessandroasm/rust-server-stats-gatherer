@@ -7,4 +7,4 @@ and so on.
 
 ## Configuration
 
-The application is configured by a JSON file.
+The application is configured by a YAML file.

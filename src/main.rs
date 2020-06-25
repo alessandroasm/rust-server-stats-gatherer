@@ -1,6 +1,9 @@
-use clap::{App, Arg};
+use clap::{App };
+mod config;
 
-fn main() {
+type AppResult<T> = Result<T, std::boxed::Box<dyn std::error::Error>>;
+
+fn main() -> AppResult<()> {
     let clap_matches = App::new("rust-server-stats-gatherer")
         .version("0.1")
         .author("Alessandro Menezes <alessandroasm@gmail.com>")
@@ -11,5 +14,8 @@ fn main() {
         )
         .get_matches();
 
-    println!("Matches: {:?}", &clap_matches);
+    let config_file = clap_matches.value_of("config").unwrap_or("config.yaml");
+    config::load_config_file(config_file)?;
+
+    Ok(())
 }
