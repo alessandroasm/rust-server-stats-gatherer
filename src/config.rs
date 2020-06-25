@@ -1,6 +1,6 @@
-use std::collections::HashMap;
+use serde::Deserialize;
 use serde_yaml;
-use serde::{Deserialize};
+use std::collections::HashMap;
 
 #[derive(Debug, Deserialize)]
 pub struct AppConfig {
@@ -17,13 +17,13 @@ pub struct AppCommand {
 pub struct AppHost {
     pub ip: String,
     pub user: String,
+    pub password: Option<String>,
 }
 
-pub fn load_config_file(config_file: &str) -> crate::AppResult<()> {
+pub fn load_config_file(config_file: &str) -> crate::AppResult<AppConfig> {
     let config_file = std::fs::File::open(config_file)?;
     let parsed_config: AppConfig = serde_yaml::from_reader(config_file)?;
 
     println!("Cfg: {:?}", &parsed_config);
-
-    Ok(())
+    Ok(parsed_config)
 }

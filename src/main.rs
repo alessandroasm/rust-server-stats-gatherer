@@ -1,5 +1,7 @@
-use clap::{App };
+use clap::App;
+
 mod config;
+mod engine;
 
 type AppResult<T> = Result<T, std::boxed::Box<dyn std::error::Error>>;
 
@@ -15,7 +17,9 @@ fn main() -> AppResult<()> {
         .get_matches();
 
     let config_file = clap_matches.value_of("config").unwrap_or("config.yaml");
-    config::load_config_file(config_file)?;
+    let config = config::load_config_file(config_file)?;
+
+    engine::run(&config)?;
 
     Ok(())
 }
